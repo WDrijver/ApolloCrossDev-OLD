@@ -1,4 +1,4 @@
-AMIGA_GCC_ROOT=./amiga-gcc
+AMIGA_GCC_ROOT=/opt/amiga
 AMIGA_GCC_BIN=$(AMIGA_GCC_ROOT)/bin
 CC=$(AMIGA_GCC_BIN)/m68k-amigaos-gcc
 LDFLAGS=

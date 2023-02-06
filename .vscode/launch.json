@@ -7,18 +7,22 @@
             "request": "launch",
             "program": "${workspaceFolder}/fs-uae/hd0/hello",
             "args": [],
-            "stopAtEntry": true,
+            "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "miDebuggerServerAddress": "localhost:2345",
             "environment": [],
             "externalConsole": false,
             "osx": {
                 "MIMode": "gdb",
-                "miDebuggerPath": "${workspaceFolder}/amiga-gcc/bin/m68k-amigaos-gdb"
+                "miDebuggerPath": "/opt/amiga/bin/m68k-amigaos-gdb",
+            },
+            "linux": {
+                "MIMode": "gdb",
+                "miDebuggerPath": "/opt/amiga/bin/m68k-amigaos-gdb",
             },
             "windows": {
                 "MIMode": "gdb",
-                "miDebuggerPath": "${workspaceFolder}/amiga-gcc/bin/m68k-amigaos-gdb.exe",
+                "miDebuggerPath": "/opt/amiga/bin/m68k-amigaos-gdb.exe",
                 "sourceFileMap": {
                     "/": "${workspaceFolder}"
                 },
@@ -32,23 +36,28 @@
             ]
         },
         {
-            "type": "fs-uae-run",
+            "type": "uae-run",
             "request": "launch",
             "name": "Run",
             "buildWorkspace": true,
-            "emulator": "${workspaceFolder}/bin/fs-uae",
             "windows": {
-                "emulator": "${workspaceFolder}/bin/fs-uae.exe",
+                "emulator": "${config:amiga-assembly.binDir}/fs-uae.exe"
             },
-            "emulatorWorkingDir": "${workspaceFolder}/bin",
+            "osx": {
+                "emulator": "${config:amiga-assembly.binDir}/fs-uae"
+            },
+            "linux": {
+                "emulator": "${config:amiga-assembly.binDir}/fs-uae"
+            },
+            "emulatorWorkingDir": "${config:amiga-assembly.binDir}",
             "options": [
-                "--chip_memory=1024",
+                "--chip_memory=2048",
+                "--fast_memory=8192",
                 "--hard_drive_0=${workspaceFolder}/fs-uae/hd0",
-                "--joystick_port_1=none",
                 "--amiga_model=A1200",
-                "--slow_memory=1792",
                 "--automatic_input_grab=0",
-                "--bsdsocket-library=1"
+                "--bsdsocket_library=1",
+                "--kickstart_file=${workspaceFolder}/fs-uae/ApolloROM_UAE.rom"
             ],
             "preLaunchTask": "Build"
         }
